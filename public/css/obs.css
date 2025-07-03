@@ -1,0 +1,64 @@
+/* quiz-app OBS用スタイル (obs.css) */
+
+/* OBS表示グリッド */
+body{
+    background: image(url('bg.png'));
+}
+.grid-obs {
+    display: grid;
+    gap: 16px;
+    width: 95vw;
+    height: 95vh;
+    margin: auto;
+    padding: 16px;
+    box-sizing: border-box;
+    justify-items: center;
+    align-items: center;
+}
+.grid-obs.cols-1 { grid-template-columns: 1fr; }
+.grid-obs.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-obs.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* グリッドセル：16:9で中央揃え */
+.obs-cell {
+    background: rgba(0,0,0,0.7);
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    position: relative; /* 名前固定用 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* 回答テキスト */
+ .obs-answer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-weight: bold;
+    font-size: clamp(12pt, 2.5vw, 48pt);
+    text-align: center;
+    word-break: break-word;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* 回答者名 */
+ .obs-name {
+    position: absolute; /* セル下部に固定 */
+    bottom: 0;
+    left: 0;
+    width: 100%;                /* 幅いっぱい */
+    background-color: #000;     /* 背景黒 */
+    color: #ffd700;
+    font-size: 18pt;             /* 文字色黄色 */
+    padding: 4px 0;             /* 少し上下余白 */
+    text-align: center;
+    word-break: break-word;
+    overflow: hidden;
+}

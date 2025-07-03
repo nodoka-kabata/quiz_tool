@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ回答者画面　- CAIND QUIZ SYSTEM</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="register-area">
+        <i class="fas fa-user-plus" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+        <h2>名前を登録してください</h2>
+        <input type="text" id="name-input" maxlength="50" placeholder="あなたの名前を入力">
+        <button id="register-btn"><i class="fas fa-check"></i> 登録</button>
+        <div id="register-msg"></div>
+    </div>
+    <div id="wait-area" style="display:none;">
+        <i class="fas fa-clock" style="font-size: 3rem; color: var(--warning-color); margin-bottom: 20px;"></i>
+        <h2>待機中です</h2>
+        <p style="color: var(--text-secondary); margin-top: 15px;">管理者が開始するまでお待ちください…</p>
+        <div class="spinner" style="margin: 30px auto;"></div>
+    </div>
+    <div id="answer-area" style="display:none;">
+        <i class="fas fa-edit" style="font-size: 3rem; color: var(--success-color); margin-bottom: 20px;"></i>
+        <h2>解答を入力してください</h2>
+        <textarea id="answer-input" rows="4" maxlength="200" placeholder="こちらに解答を入力してください"></textarea>
+        <button id="answer-btn"><i class="fas fa-paper-plane"></i> 送信</button>
+        <div id="answer-msg"></div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
