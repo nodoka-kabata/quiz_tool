@@ -1,9 +1,9 @@
 {
   "name": "CAIND QUIZ SYSTEM",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "status": "beta",
   "build": "20250705",
-  "description": "テレビクイズ番組風の回答表示システム",
+  "description": "チE��ビクイズ番絁E��の回答表示シスチE��",
   "author": "nodoka-kabata",
   "repository": "https://github.com/nodoka-kabata/quiz_tool"
 }
