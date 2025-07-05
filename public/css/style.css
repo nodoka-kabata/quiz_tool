@@ -60,6 +60,7 @@ body {
     gap: 20px;
     padding: 25px 0;
     border-bottom: 2px solid var(--border-accent);
+    position: relative;
 }
 
 .admin-header h1 {
@@ -617,6 +618,41 @@ input:checked + .slider:before {
     justify-content: center;
     font-size: 0.9rem;
     font-weight: bold;
+}
+
+/* バージョン表示とシステムヘッダー */
+.system-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.system-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.version-display {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    opacity: 0.8;
+    font-family: 'Courier New', monospace;
+}
+
+/* 管理者画面のバージョン表示 */
+.admin-header .version-display {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
 /* レスポンシブデザイン */

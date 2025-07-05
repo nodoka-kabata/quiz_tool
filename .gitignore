@@ -19,7 +19,6 @@ Thumbs.db
 
 # Windows固有
 *.lnk
-watch_logs.bat
 
 # テキストファイル（一時的なメモなど）
 *.txt
