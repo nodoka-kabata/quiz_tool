@@ -1,0 +1,25 @@
+# デバッグ・ログファイル
+debug.log
+*.log
+
+# データベース設定ファイル（本番環境では別途設定）
+# api/db.php
+
+# 一時ファイル
+*.tmp
+*.temp
+
+# エディタ設定
+.vscode/
+.idea/
+
+# システムファイル
+Thumbs.db
+.DS_Store
+
+# Windows固有
+*.lnk
+watch_logs.bat
+
+# テキストファイル（一時的なメモなど）
+*.txt

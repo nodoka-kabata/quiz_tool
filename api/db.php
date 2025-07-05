@@ -1,6 +1,6 @@
 <?php
 // デバッグ設定を読み込み
-require_once '../debug_setup.php';
+require_once 'debug_setup.php';
 
 // DB接続設定
 $host = 'localhost';

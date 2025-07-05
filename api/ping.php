@@ -1,5 +1,6 @@
 <?php
 // Ping API
+require_once 'debug_setup.php';
 header('Content-Type: application/json');
 require_once 'db.php'; // 認証や他APIと同様の要件があれば読み込む
 

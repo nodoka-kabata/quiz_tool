@@ -1,5 +1,6 @@
 <?php
 // 回答送信・取得API
+require_once 'debug_setup.php';
 header('Content-Type: application/json');
 require_once 'db.php';
 

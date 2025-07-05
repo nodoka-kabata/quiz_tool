@@ -1,5 +1,6 @@
 <?php
 // 心拍ハートビートAPI
+require_once 'debug_setup.php';
 header('Content-Type: application/json');
 require_once 'db.php';
 
