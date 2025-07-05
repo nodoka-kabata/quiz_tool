@@ -7,7 +7,7 @@ require_once 'db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = intval($_POST['user_id'] ?? 0);
     $answer = trim($_POST['answer'] ?? '');
-    $question_id = intval($_POST['question_id'] ?? null);
+    $question_id = intval($_POST['question_id'] ?? 0);
     
     if ($user_id === 0 || $answer === '') {
         echo json_encode(['error' => '不正な入力']);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$question_id) {
         $stmt = $pdo->query('SELECT current_question_id FROM quiz_state WHERE id = 1');
         $result = $stmt->fetch();
-        $question_id = $result['current_question_id'] ?? null;
+        $question_id = $result['current_question_id'] ?? 1; // デフォルト問題1
     }
     
     // 既に回答があれば上書き
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (!$question_id) {
         $stmt = $pdo->query('SELECT current_question_id FROM quiz_state WHERE id = 1');
         $result = $stmt->fetch();
-        $question_id = $result['current_question_id'] ?? null;
+        $question_id = $result['current_question_id'] ?? 1; // デフォルト問題1
     }
     
     // 回答一覧取得（管理者・OBS用）

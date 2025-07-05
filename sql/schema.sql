@@ -45,3 +45,7 @@ CREATE TABLE quiz_state (
 
 -- 初期状態をwaitingでセット
 INSERT INTO quiz_state (id, state) VALUES (1, 'waiting');
+
+-- デフォルト問題を作成
+INSERT INTO questions (title, description, answer_type, time_limit, max_length, question_order) 
+VALUES ('デフォルト問題', '最初に作成される問題です。管理画面から編集してください。', 'text', 60, 200, 1);

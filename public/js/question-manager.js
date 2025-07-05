@@ -58,7 +58,7 @@ class QuestionManager {
     // 問題一覧を読み込み
     async loadQuestions() {
         try {
-            const response = await fetch('/api/questions.php?action=list');
+            const response = await fetch('../api/questions.php?action=list');
             const data = await response.json();
             
             if (data.success) {
@@ -74,7 +74,7 @@ class QuestionManager {
     // 現在の問題を読み込み
     async loadCurrentQuestion() {
         try {
-            const response = await fetch('/api/questions.php?action=get_current');
+            const response = await fetch('../api/questions.php?action=get_current');
             const data = await response.json();
             
             if (data.success && data.current_question) {
@@ -264,7 +264,7 @@ class QuestionManager {
         formData.append('is_active', document.getElementById('is-active').checked ? 1 : 0);
 
         try {
-            const response = await fetch('/api/questions.php', {
+            const response = await fetch('../api/questions.php', {
                 method: 'POST',
                 body: formData
             });
@@ -305,7 +305,7 @@ class QuestionManager {
             formData.append('action', 'delete');
             formData.append('question_id', questionId);
 
-            const response = await fetch('/api/questions.php', {
+            const response = await fetch('../api/questions.php', {
                 method: 'POST',
                 body: formData
             });
@@ -330,7 +330,7 @@ class QuestionManager {
             formData.append('action', 'set_current');
             formData.append('question_id', questionId);
 
-            const response = await fetch('/api/questions.php', {
+            const response = await fetch('../api/questions.php', {
                 method: 'POST',
                 body: formData
             });
@@ -365,7 +365,7 @@ class QuestionManager {
             formData.append('action', 'reorder');
             formData.append('orders', JSON.stringify(orders));
 
-            const response = await fetch('/api/questions.php', {
+            const response = await fetch('../api/questions.php', {
                 method: 'POST',
                 body: formData
             });

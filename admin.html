@@ -111,8 +111,8 @@
         async function exportData() {
             try {
                 const [usersResponse, answersResponse] = await Promise.all([
-                    fetch('/api/users.php'),
-                    fetch('/api/answer.php')
+                    fetch('../api/users.php'),
+                    fetch('../api/answer.php')
                 ]);
                 
                 const usersData = await usersResponse.json();

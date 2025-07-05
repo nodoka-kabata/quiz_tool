@@ -54,6 +54,16 @@ switch ($action) {
             echo json_encode(['error' => 'answer_id必須']);
         }
         break;
+    case 'show':
+        // 回答表示
+        $answer_id = intval($_POST['answer_id'] ?? 0);
+        if ($answer_id) {
+            $pdo->prepare('UPDATE answers SET is_hidden = 0 WHERE id = ?')->execute([$answer_id]);
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['error' => 'answer_id必須']);
+        }
+        break;
     case 'order':
         // 並び替え
         $orders = $_POST['orders'] ?? [];

@@ -119,9 +119,14 @@ function displayAnswers() {
             <div class="list-item-header">
                 <div class="list-item-name">${escapeHtml(ans.name)}</div>
                 <div class="list-item-actions">
-                    <button class="btn-small btn-hide" onclick="hideAnswer(${ans.id})">
-                        <i class="fas fa-eye-slash"></i> 非表示
-                    </button>
+                    ${ans.is_hidden ? 
+                        `<button class="btn-small btn-show" onclick="showAnswer(${ans.id})">
+                            <i class="fas fa-eye"></i> 表示
+                        </button>` :
+                        `<button class="btn-small btn-hide" onclick="hideAnswer(${ans.id})">
+                            <i class="fas fa-eye-slash"></i> 非表示
+                        </button>`
+                    }
                 </div>
             </div>
             <div class="list-item-content">
@@ -219,6 +224,22 @@ function hideAnswer(id) {
     .catch(err => console.error('非表示エラー:', err));
 }
 
+function showAnswer(id) {
+    // 回答表示処理
+    fetch('../api/admin.php', {
+        method: 'POST',
+        body: new URLSearchParams({action: 'show', answer_id: id})
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchAnswers();
+        } else {
+            console.error('表示処理に失敗しました');
+        }
+    })
+    .catch(err => console.error('表示エラー:', err));
+}
+
 function kickUser(id) {
     if (!confirm('このユーザーをキックしますか？')) return;
     // 二重送信防止
@@ -280,7 +301,6 @@ function getStateColor(state) {
             return 'var(--card-bg)';
     }
 }
-/**
 /**
  * ユーザーリストの並び順を更新し、サーバーに保存する
  */
