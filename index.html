@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <title>クイズ回答者画面　- CAIND QUIZ SYSTEM</title>
     <link rel="stylesheet" href="public/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -32,6 +36,7 @@
         <button id="answer-btn"><i class="fas fa-paper-plane"></i> 送信</button>
         <div id="answer-msg"></div>
     </div>
+    <script src="public/js/ssl-security.js"></script>
     <script src="public/js/version.js"></script>
     <script src="public/js/main.js"></script>
 </body>

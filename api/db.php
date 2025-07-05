@@ -1,4 +1,7 @@
 <?php
+// SSL/セキュリティ設定を読み込み
+require_once 'ssl_config.php';
+
 // デバッグ設定を読み込み
 require_once 'debug_setup.php';
 
