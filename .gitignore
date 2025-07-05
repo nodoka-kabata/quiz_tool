@@ -2,6 +2,10 @@
 debug.log
 *.log
 
+# 環境設定ファイル
+.env
+config/local_config.php
+
 # SSL証明書・秘密鍵（セキュリティ上の理由で除外）
 *.crt
 *.key
@@ -10,12 +14,27 @@ debug.log
 *.pfx
 *.csr
 
+# デプロイ用ファイル
+deploy_backup_*
+*.tar.gz
+.htaccess.deploy
+.env.deploy
+
 # データベース設定ファイル（本番環境では別途設定）
 # api/db.php
+
+# バックアップファイル
+backups/
+*.backup
+*.bak
 
 # 一時ファイル
 *.tmp
 *.temp
+
+# FTPクライアント設定
+.ftpconfig
+.deploymentconfig
 
 # エディタ設定
 .vscode/
@@ -29,4 +48,8 @@ Thumbs.db
 *.lnk
 
 # テキストファイル（一時的なメモなど）
-*.txt
+無題*.txt
+memo.txt
+
+# ローカル開発用
+local_*

@@ -19,8 +19,10 @@ function force_https() {
 
 // セキュリティヘッダーの設定
 function set_security_headers() {
-    // HTTPS強制
-    header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+    // 開発環境でのみHTTPS強制（本番では別途設定）
+    if (!isset($_SERVER['HTTP_HOST']) || strpos($_SERVER['HTTP_HOST'], 'localhost') === false) {
+        header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+    }
     
     // コンテンツタイプスニッフィング防止
     header('X-Content-Type-Options: nosniff');
@@ -34,14 +36,12 @@ function set_security_headers() {
     // リファラーポリシー
     header('Referrer-Policy: strict-origin-when-cross-origin');
     
-    // CSP（Content Security Policy）- 基本設定
-    $csp = "default-src 'self'; " .
-           "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " .
-           "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; " .
-           "font-src 'self' https://cdnjs.cloudflare.com; " .
-           "img-src 'self' data:; " .
-           "connect-src 'self';";
-    header('Content-Security-Policy: ' . $csp);
+    // CORS設定（開発環境用）
+    if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    }
 }
 
 // 本番環境でのみHTTPS強制を有効化

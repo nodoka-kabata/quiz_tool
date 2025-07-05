@@ -1,5 +1,10 @@
 # CAIND QUIZ SYSTEM - Apache設定ファイル
 
+# エラーページ設定
+ErrorDocument 500 /quiz_tool/error.html
+ErrorDocument 403 /quiz_tool/error.html
+ErrorDocument 404 /quiz_tool/error.html
+
 # HTTPS強制リダイレクト（本番環境用）
 RewriteEngine On
 
@@ -10,8 +15,8 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # セキュリティヘッダー
 <IfModule mod_headers.c>
-    # HSTS（HTTP Strict Transport Security）
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+    # HSTS（HTTP Strict Transport Security）- 本番環境のみ
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" "expr=%{HTTP_HOST} != 'localhost'"
     
     # XSS保護
     Header always set X-XSS-Protection "1; mode=block"
@@ -27,31 +32,44 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     
     # CSP（Content Security Policy）
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';"
+    
+    # CORS設定（開発環境用）
+    Header always set Access-Control-Allow-Origin "*" "expr=%{HTTP_HOST} == 'localhost'"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS" "expr=%{HTTP_HOST} == 'localhost'"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization" "expr=%{HTTP_HOST} == 'localhost'"
 </IfModule>
 
 # ファイルアクセス制限
 <Files "*.log">
-    Order deny,allow
-    Deny from all
+    Require all denied
 </Files>
 
 <Files "debug.log">
-    Order deny,allow
-    Deny from all
+    Require all denied
 </Files>
 
-# 設定ファイルへの直接アクセス禁止
+<Files "*.bat">
+    Require all denied
+</Files>
+
+<Files "*.ps1">
+    Require all denied
+</Files>
+
+# 設定ファイルへの直接アクセス制限（version.jsonは除外）
 <Files "*.json">
-    <RequireAll>
-        Require all denied
-        Require local
-    </RequireAll>
+    Require all denied
+</Files>
+
+# version.jsonは読み込み可能にする
+<Files "version.json">
+    Require all granted
 </Files>
 
 # PHPファイルの直接実行防止（APIディレクトリ以外）
-RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !^/quiz_tool/api/
 RewriteCond %{REQUEST_URI} \.php$
-RewriteRule ^(.*)$ / [R=301,L]
+RewriteRule ^(.*)$ /quiz_tool/ [R=301,L]
 
 # デフォルトページ設定
 DirectoryIndex index.html index.php
@@ -83,3 +101,7 @@ DirectoryIndex index.html index.php
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
+
+# サーバー情報の隠蔽
+ServerTokens Prod
+ServerSignature Off

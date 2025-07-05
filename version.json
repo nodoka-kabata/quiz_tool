@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "status": "stable",
   "build": "20250705",
-  "description": "チE��ビクイズ番絁E��の回答表示シスチE��",
+  "description": "チーム向けクイズ番組の回答表示システム",
   "author": "nodoka-kabata",
   "repository": "https://github.com/nodoka-kabata/quiz_tool"
 }

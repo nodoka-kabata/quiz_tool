@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>システムエラー - CAIND QUIZ SYSTEM</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .error-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            text-align: center;
+            background: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            color: var(--error-color);
+            margin-bottom: 20px;
+        }
+        
+        .error-title {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .error-message {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="system-header">
+        <div class="system-title">CAIND QUIZ SYSTEM</div>
+        <div class="version-display"></div>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h1 class="error-title">システムエラーが発生しました</h1>
+        <p class="error-message">
+            申し訳ございませんが、システムでエラーが発生しました。<br>
+            以下の手順をお試しください。
+        </p>
+        
+        <div class="error-actions">
+            <button class="btn btn-primary" onclick="location.reload()">
+                <i class="fas fa-refresh"></i> ページを再読み込み
+            </button>
+            <button class="btn btn-outline" onclick="location.href='/'">
+                <i class="fas fa-home"></i> ホームに戻る
+            </button>
+            <button class="btn btn-outline" onclick="window.open('/quiz_tool/api/db_check.php')">
+                <i class="fas fa-stethoscope"></i> システム診断
+            </button>
+        </div>
+        
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                問題が解決しない場合は、管理者にお問い合わせください。
+            </p>
+        </div>
+    </div>
+    
+    <script src="public/js/version.js"></script>
+</body>
+</html>

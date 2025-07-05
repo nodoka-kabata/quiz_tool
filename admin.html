@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <title>クイズ管理者画面</title>
     <link rel="stylesheet" href="public/css/style.css">
@@ -111,8 +110,8 @@
         async function exportData() {
             try {
                 const [usersResponse, answersResponse] = await Promise.all([
-                    fetch('../api/users.php'),
-                    fetch('../api/answer.php')
+                    fetch('api/users.php'),
+                    fetch('api/answer.php')
                 ]);
                 
                 const usersData = await usersResponse.json();
