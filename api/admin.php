@@ -34,6 +34,16 @@ switch ($action) {
             echo json_encode(['error' => 'user_id必須']);
         }
         break;
+    case 'unkick':
+        // キック解除
+        $user_id = intval($_POST['user_id'] ?? 0);
+        if ($user_id) {
+            $pdo->prepare('UPDATE users SET is_kicked = 0 WHERE id = ?')->execute([$user_id]);
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['error' => 'user_id必須']);
+        }
+        break;
     case 'hide':
         // 回答非表示
         $answer_id = intval($_POST['answer_id'] ?? 0);

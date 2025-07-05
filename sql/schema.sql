@@ -14,16 +14,33 @@ CREATE TABLE users (
 CREATE TABLE answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    question_id INT DEFAULT NULL,
     answer_text TEXT,
     is_hidden BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE SET NULL
+);
+
+CREATE TABLE questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    description TEXT,
+    answer_type ENUM('text','number','choice') DEFAULT 'text',
+    time_limit INT DEFAULT 60,
+    max_length INT DEFAULT 200,
+    question_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE quiz_state (
     id INT PRIMARY KEY,
     state ENUM('waiting','answering','closed','reset') NOT NULL,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    current_question_id INT DEFAULT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (current_question_id) REFERENCES questions(id) ON DELETE SET NULL
 );
 
 -- 初期状態をwaitingでセット

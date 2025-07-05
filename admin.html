@@ -30,7 +30,16 @@
             <button id="reset-btn" class="btn btn-danger">
                 <i class="fas fa-refresh"></i> リセット
             </button>
+            <button id="settings-btn" class="btn btn-secondary">
+                <i class="fas fa-cog"></i> 設定
+            </button>
+            <button id="export-btn" class="btn btn-info">
+                <i class="fas fa-download"></i> エクスポート
+            </button>
         </div>
+        
+        <!-- 統計情報ダッシュボード -->
+        <div id="stats-container" class="stats-dashboard"></div>
         <div class="content-grid">
             <!-- OBS表示パネル -->
             <div class="panel obs-panel">
@@ -75,7 +84,64 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="public/js/ssl-security.js"></script>
     <script src="public/js/version.js"></script>
+    <script src="public/js/dashboard.js"></script>
+    <script src="public/js/bulk-operations.js"></script>
+    <script src="public/js/settings.js"></script>
+    <script src="public/js/question-manager.js"></script>
     <script src="public/js/debug.js"></script>
     <script src="public/js/admin.js"></script>
+    <script>
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // ダッシュボード開始
+            window.dashboardStats.startAutoUpdate();
+            
+            // 設定ボタンイベント
+            document.getElementById('settings-btn').addEventListener('click', () => {
+                window.settingsManager.showSettings();
+            });
+            
+            // エクスポートボタンイベント
+            document.getElementById('export-btn').addEventListener('click', () => {
+                exportData();
+            });
+        });
+        
+        // データエクスポート機能
+        async function exportData() {
+            try {
+                const [usersResponse, answersResponse] = await Promise.all([
+                    fetch('/api/users.php'),
+                    fetch('/api/answer.php')
+                ]);
+                
+                const usersData = await usersResponse.json();
+                const answersData = await answersResponse.json();
+                
+                const exportData = {
+                    timestamp: new Date().toISOString(),
+                    users: usersData.users,
+                    answers: answersData.answers
+                };
+                
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                    type: 'application/json'
+                });
+                
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `quiz-data-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                window.bulkOperations.showNotification('データをエクスポートしました', 'success');
+            } catch (error) {
+                window.bulkOperations.showNotification('エクスポートに失敗しました', 'error');
+            }
+        }
+    </script>
 </body>
 </html>
